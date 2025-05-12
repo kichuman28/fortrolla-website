@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-fortrolla-black text-fortrolla-white font-sans;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-fortrolla-accent hover:bg-fortrolla-accent/90 text-white font-medium rounded-full transition-all duration-300 shadow-lg shadow-fortrolla-accent/20 hover:shadow-fortrolla-accent/40 transform hover:-translate-y-1;
+  }
+  
+  .btn-primary-mobile {
+    @apply inline-flex items-center justify-center px-5 py-2.5 bg-fortrolla-accent hover:bg-fortrolla-accent/90 text-white font-medium rounded-full transition-all duration-300 w-full text-center;
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-transparent hover:bg-fortrolla-white/5 text-fortrolla-white font-medium rounded-full transition-all duration-300 border border-fortrolla-accent hover:border-fortrolla-white transform hover:-translate-y-1;
+  }
+  
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold font-display mb-6 text-fortrolla-white;
+  }
+  
+  .section-subtitle {
+    @apply text-lg text-fortrolla-silver max-w-3xl mx-auto;
+  }
+}
+
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 10s linear infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-fortrolla-accent to-fortrolla-secondary;
+  }
+}
