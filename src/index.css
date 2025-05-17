@@ -44,6 +44,15 @@
   .section-subtitle {
     @apply text-lg text-fortrolla-light/80 max-w-3xl mx-auto;
   }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
 }
 
 @layer utilities {
