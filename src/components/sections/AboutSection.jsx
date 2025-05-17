@@ -51,23 +51,59 @@ const AboutSection = () => {
               Fortrolla Creative delivers premium digital advertising solutions for films, events, and theatrical productions. Based in Kochi, we combine artistic vision with technical expertise to create campaigns that captivate and convert.
             </p>
             
-            <div className="grid grid-cols-2 gap-4 my-8">
-              {[
-                { value: "5+", label: "Clients" },
-                { value: "100+", label: "Projects" },
-                { value: "2+", label: "Years" },
-                { value: "10+", label: "Awards" }
-              ].map((stat, index) => (
-                <div key={index} className="p-4 bg-fortrolla-black/30 backdrop-blur-sm rounded-lg border border-fortrolla-gray/20 text-center group hover:border-fortrolla-pink/30 transition-all duration-300">
-                  <div className="text-3xl font-bold text-fortrolla-gold mb-1 group-hover:text-fortrolla-pink transition-colors duration-300">{stat.value}</div>
-                  <div className="text-sm text-fortrolla-light/80">{stat.label}</div>
+            {/* Premium Features Section */}
+            <div className="mt-8 space-y-4">
+              <div className="flex items-start space-x-4 group">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-fortrolla-pink to-fortrolla-gold p-0.5">
+                  <div className="w-full h-full rounded-full bg-fortrolla-black flex items-center justify-center">
+                    <svg className="w-6 h-6 text-fortrolla-gold group-hover:text-fortrolla-pink transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
+                  </div>
                 </div>
-              ))}
+                <div>
+                  <h3 className="text-fortrolla-white text-lg font-medium mb-1">Creative Excellence</h3>
+                  <p className="text-fortrolla-light/70 text-sm">Blending artistic vision with technical precision to create memorable experiences</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-4 group">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-fortrolla-pink to-fortrolla-gold p-0.5">
+                  <div className="w-full h-full rounded-full bg-fortrolla-black flex items-center justify-center">
+                    <svg className="w-6 h-6 text-fortrolla-gold group-hover:text-fortrolla-pink transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-fortrolla-white text-lg font-medium mb-1">Innovative Approach</h3>
+                  <p className="text-fortrolla-light/70 text-sm">Cutting-edge technologies and fresh ideas to make your brand stand out</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-4 group">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-fortrolla-pink to-fortrolla-gold p-0.5">
+                  <div className="w-full h-full rounded-full bg-fortrolla-black flex items-center justify-center">
+                    <svg className="w-6 h-6 text-fortrolla-gold group-hover:text-fortrolla-pink transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-fortrolla-white text-lg font-medium mb-1">Personal Touch</h3>
+                  <p className="text-fortrolla-light/70 text-sm">Dedicated attention to every client with tailored solutions for your unique needs</p>
+                </div>
+              </div>
             </div>
             
-            <a href="#services" className="btn-secondary inline-block">
-              Explore Services
-            </a>
+            <div className="pt-4">
+              <a href="#services" className="btn-secondary inline-flex items-center group">
+                <span>Explore Services</span>
+                <svg className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
