@@ -4,14 +4,21 @@ import logo from '../../assets/images/logo.png';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   
   useEffect(() => {
     const handleScroll = () => {
+      // Check if scrolled past threshold
       if (window.scrollY > 20) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
+      
+      // Calculate scroll progress percentage
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / scrollHeight) * 100;
+      setScrollProgress(scrolled);
     };
     
     window.addEventListener('scroll', handleScroll);
@@ -20,11 +27,22 @@ const Navbar = () => {
 
   return (
     <header className="fixed w-full z-50 px-4 py-3 flex justify-center">
-      <div className={`transition-all duration-300 w-[95%] max-w-7xl rounded-xl ${
-        isScrolled 
-          ? 'bg-fortrolla-black/70 backdrop-blur-md shadow-lg' 
-          : 'bg-fortrolla-black/50 backdrop-blur-sm'
-      }`}>
+      <div 
+        className={`transition-all duration-300 w-[95%] max-w-7xl rounded-xl border border-transparent ${
+          isScrolled 
+            ? 'bg-fortrolla-black/80 backdrop-blur-md shadow-lg border-fortrolla-gold/20 translate-y-0' 
+            : 'bg-fortrolla-black/40 backdrop-blur-sm translate-y-2'
+        }`}
+        style={{
+          boxShadow: isScrolled ? `0 10px 30px -10px rgba(255, 184, 108, 0.15)` : 'none',
+        }}
+      >
+        {/* Progress bar */}
+        <div 
+          className="absolute top-0 left-0 h-0.5 bg-gradient-to-r from-fortrolla-gold via-fortrolla-pink to-fortrolla-magenta rounded-t-xl transition-all duration-300"
+          style={{ width: `${scrollProgress}%` }}
+        ></div>
+        
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex items-center justify-between py-2">
             {/* Logo */}
@@ -42,7 +60,9 @@ const Navbar = () => {
                 <a 
                   key={item} 
                   href={`#${item.toLowerCase()}`} 
-                  className="font-sans text-fortrolla-light/80 hover:text-fortrolla-pink font-medium transition-colors duration-300"
+                  className={`font-sans hover:text-fortrolla-pink font-medium transition-all duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-fortrolla-pink after:w-0 after:transition-all after:duration-300 hover:after:w-full ${
+                    isScrolled ? 'text-fortrolla-white/90' : 'text-fortrolla-light/80'
+                  }`}
                 >
                   {item}
                 </a>
@@ -53,7 +73,7 @@ const Navbar = () => {
             <div className="hidden md:block">
               <a 
                 href="#contact" 
-                className="btn-primary"
+                className={`btn-primary ${isScrolled ? 'shadow-lg' : ''}`}
               >
                 Get In Touch
               </a>
