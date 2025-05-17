@@ -14,15 +14,15 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 bg-fortrolla-accent hover:bg-fortrolla-accent/90 text-white font-medium rounded-full transition-all duration-300 shadow-lg shadow-fortrolla-accent/20 hover:shadow-fortrolla-accent/40 transform hover:-translate-y-1;
+    @apply inline-flex items-center justify-center px-6 py-3 bg-fortrolla-pink hover:bg-fortrolla-magenta text-white font-medium rounded-full transition-all duration-300 shadow-lg shadow-fortrolla-pink/20 hover:shadow-fortrolla-magenta/40 transform hover:-translate-y-1;
   }
   
   .btn-primary-mobile {
-    @apply inline-flex items-center justify-center px-5 py-2.5 bg-fortrolla-accent hover:bg-fortrolla-accent/90 text-white font-medium rounded-full transition-all duration-300 w-full text-center;
+    @apply inline-flex items-center justify-center px-5 py-2.5 bg-fortrolla-pink hover:bg-fortrolla-magenta text-white font-medium rounded-full transition-all duration-300 w-full text-center;
   }
   
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 bg-transparent hover:bg-fortrolla-white/5 text-fortrolla-white font-medium rounded-full transition-all duration-300 border border-fortrolla-accent hover:border-fortrolla-white transform hover:-translate-y-1;
+    @apply inline-flex items-center justify-center px-6 py-3 bg-transparent hover:bg-fortrolla-white/5 text-fortrolla-white font-medium rounded-full transition-all duration-300 border border-fortrolla-gold hover:border-fortrolla-pink transform hover:-translate-y-1;
   }
   
   .section-title {
@@ -30,7 +30,7 @@
   }
   
   .section-subtitle {
-    @apply text-lg text-fortrolla-silver max-w-3xl mx-auto;
+    @apply text-lg text-fortrolla-light/80 max-w-3xl mx-auto;
   }
 }
 
@@ -53,6 +53,14 @@
   }
   
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-fortrolla-accent to-fortrolla-secondary;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-fortrolla-pink to-fortrolla-magenta;
+  }
+  
+  .text-accent {
+    @apply text-fortrolla-pink;
+  }
+  
+  .text-secondary {
+    @apply text-fortrolla-gold;
   }
 }

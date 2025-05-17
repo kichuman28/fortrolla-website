@@ -37,9 +37,9 @@ const ServicesSection = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-fortrolla-white font-display text-3xl md:text-4xl font-bold mb-6">
-            Our <span className="text-fortrolla-accent">Services</span>
+            Our <span className="text-fortrolla-pink">Services</span>
           </h2>
-          <p className="text-fortrolla-silver">
+          <p className="text-fortrolla-light/80">
             We offer a comprehensive range of digital advertising services to help your brand shine.
           </p>
         </div>
@@ -48,11 +48,11 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="bg-gradient-to-br from-fortrolla-dark to-fortrolla-gray/30 p-8 rounded-lg border border-fortrolla-gray/10 group hover:border-fortrolla-accent/20 transition-all duration-300 hover:shadow-lg hover:shadow-fortrolla-accent/5"
+              className="bg-gradient-to-br from-fortrolla-dark to-fortrolla-gray/30 p-8 rounded-lg border border-fortrolla-gray/10 group hover:border-fortrolla-pink/20 transition-all duration-300 hover:shadow-lg hover:shadow-fortrolla-pink/5"
             >
-              <div className="w-16 h-16 rounded-lg bg-fortrolla-accent/10 flex items-center justify-center mb-6 group-hover:bg-fortrolla-accent/20 transition-all duration-300">
+              <div className="w-16 h-16 rounded-lg bg-fortrolla-pink/10 flex items-center justify-center mb-6 group-hover:bg-fortrolla-pink/20 transition-all duration-300">
                 <svg 
-                  className="w-8 h-8 text-fortrolla-accent" 
+                  className="w-8 h-8 text-fortrolla-pink" 
                   fill="none" 
                   stroke="currentColor" 
                   viewBox="0 0 24 24"
@@ -61,11 +61,11 @@ const ServicesSection = () => {
                 </svg>
               </div>
               
-              <h3 className="text-xl font-semibold text-fortrolla-white mb-4 group-hover:text-fortrolla-accent transition-colors duration-300">
+              <h3 className="text-xl font-semibold text-fortrolla-white mb-4 group-hover:text-fortrolla-pink transition-colors duration-300">
                 {service.title}
               </h3>
               
-              <p className="text-fortrolla-silver leading-relaxed">
+              <p className="text-fortrolla-light/80 leading-relaxed">
                 {service.description}
               </p>
             </div>

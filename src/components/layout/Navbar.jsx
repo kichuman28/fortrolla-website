@@ -27,7 +27,7 @@ const Navbar = () => {
             <img src={logo} alt="Fortrolla Creative" className="h-12" />
             <span className="font-display text-fortrolla-white text-xl font-semibold tracking-wider">
               <span>FORTROLLA</span>
-              <span className="block text-xs tracking-widest font-sans text-fortrolla-silver">CREATIVE</span>
+              <span className="block text-xs tracking-widest font-sans text-fortrolla-gold">CREATIVE</span>
             </span>
           </a>
           
@@ -37,7 +37,7 @@ const Navbar = () => {
               <a 
                 key={item} 
                 href={`#${item.toLowerCase()}`} 
-                className="font-sans text-fortrolla-silver hover:text-fortrolla-white font-medium transition-colors duration-300"
+                className="font-sans text-fortrolla-light/80 hover:text-fortrolla-pink font-medium transition-colors duration-300"
               >
                 {item}
               </a>
@@ -78,7 +78,7 @@ const Navbar = () => {
                 <a 
                   key={item} 
                   href={`#${item.toLowerCase()}`} 
-                  className="font-sans text-fortrolla-silver hover:text-fortrolla-white font-medium transition-colors duration-300 py-2"
+                  className="font-sans text-fortrolla-light/80 hover:text-fortrolla-pink font-medium transition-colors duration-300 py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item}

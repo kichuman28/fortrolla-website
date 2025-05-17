@@ -8,19 +8,19 @@ export default {
     extend: {
       colors: {
         'fortrolla': {
-          'black': '#0A0A0A',
-          'dark': '#1A1A1A',
-          'gray': '#2A2A2A',
-          'silver': '#C0C0C0',
+          'black': '#000000',
+          'dark': '#111111',
+          'gray': '#222222',
+          'pink': '#FF4191',
+          'magenta': '#E90074',
+          'gold': '#FFD700',
           'light': '#F0F0F0',
           'white': '#FFFFFF',
-          'accent': '#8A2BE2', // Vibrant purple accent
-          'secondary': '#4B0082', // Deep indigo for secondary accents
         },
       },
       fontFamily: {
-        'sans': ['Montserrat', 'sans-serif'],
-        'display': ['Playfair Display', 'serif'],
+        'sans': ['ABeeZee', 'sans-serif'],
+        'display': ['ABeeZee', 'sans-serif'],
         'mono': ['Space Mono', 'monospace'],
       },
       animation: {

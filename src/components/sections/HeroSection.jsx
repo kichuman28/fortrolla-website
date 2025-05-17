@@ -33,12 +33,12 @@ const HeroSection = () => {
             className={`font-display text-4xl md:text-5xl lg:text-6xl font-bold text-fortrolla-white mb-6 transition-all duration-1000 ${isLoaded ? 'opacity-100 transform-none' : 'opacity-0 translate-y-10'}`}
             style={{ transitionDelay: '400ms' }}
           >
-            Crafting Digital <span className="text-fortrolla-accent">Magic</span> That Captivates
+            Crafting Digital <span className="text-fortrolla-pink">Magic</span> That <span className="text-fortrolla-gold">Captivates</span>
           </h1>
           
           {/* Subheading */}
           <p 
-            className={`text-fortrolla-silver text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl transition-all duration-1000 ${isLoaded ? 'opacity-100 transform-none' : 'opacity-0 translate-y-10'}`}
+            className={`text-fortrolla-light/80 text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl transition-all duration-1000 ${isLoaded ? 'opacity-100 transform-none' : 'opacity-0 translate-y-10'}`}
             style={{ transitionDelay: '600ms' }}
           >
             A premium digital advertising agency creating extraordinary campaigns 
@@ -69,9 +69,9 @@ const HeroSection = () => {
             className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center transition-all duration-1000 ${isLoaded ? 'opacity-100 transform-none' : 'opacity-0 translate-y-10'}`}
             style={{ transitionDelay: '1000ms' }}
           >
-            <span className="text-fortrolla-silver text-sm mb-2">Scroll Down</span>
+            <span className="text-fortrolla-light/80 text-sm mb-2">Scroll Down</span>
             <svg 
-              className="w-5 h-5 text-fortrolla-accent animate-bounce" 
+              className="w-5 h-5 text-fortrolla-gold animate-bounce" 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
