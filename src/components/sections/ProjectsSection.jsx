@@ -55,8 +55,24 @@ const ProjectsSection = () => {
   ];
 
   return (
-    <section id="projects" className="py-24 bg-fortrolla-dark">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="projects" className="relative py-24 overflow-hidden">
+      {/* Background with gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-bl from-fortrolla-black via-fortrolla-dark/95 to-fortrolla-magenta/10"></div>
+      
+      {/* Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-fortrolla-pink to-transparent opacity-30"></div>
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-fortrolla-gold to-transparent opacity-30"></div>
+      
+      {/* Animated Gradient Circles */}
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-fortrolla-gold/5 rounded-full filter blur-3xl animate-float opacity-30"></div>
+      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-fortrolla-pink/5 rounded-full filter blur-3xl animate-float opacity-40" style={{ animationDelay: '4s' }}></div>
+      
+      {/* Grid Pattern Overlay */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="h-full w-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZoLTJ2LTRoMnY0em0wLTZoLTJ2LTRoMnY0em0wLTZoLTJWOGgydjR6bTAgMThoLTJ2LTRoMnY0em0wIDZoLTJ2LTRoMnY0em0wIDZoLTJ2LTRoMnY0em0wLTQyaC0yVjBoMnY2ek0xMiAzNGgtMnYtNGgydjR6bTAgNmgtMnYtNGgydjR6bTAtMTJoLTJ2LTRoMnY0em0wLTZoLTJ2LTRoMnY0em0wLTZoLTJWOGgydjR6bTAtNmgtMlYwaDJ2NnptMTIgMjRoLTJ2LTRoMnY0em0wIDZoLTJ2LTRoMnY0em0wLTEyaC0ydi00aDJ2NHptMC02aC0ydi00aDJ2NHptMC02aC0yVjhoMnY0em0wLTZoLTJWMGgydjZ6bTEyIDI0aC0ydi00aDJ2NHptMCA2aC0ydi00aDJ2NHptMC0xMmgtMnYtNGgydjR6bTAtNmgtMnYtNGgydjR6bTAtNmgtMlY4aDJ2NHptMC02aC0yVjBoMnY2eiIvPjwvZz48L2c+PC9zdmc+')]"></div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-fortrolla-white font-display text-3xl md:text-4xl font-bold mb-6">
             Our <span className="text-fortrolla-pink">Projects</span>
@@ -74,8 +90,8 @@ const ProjectsSection = () => {
               onClick={() => setFilter(category.id)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
                 ${filter === category.id 
-                  ? 'bg-fortrolla-pink text-white shadow-lg shadow-fortrolla-pink/30' 
-                  : 'bg-fortrolla-gray/20 text-fortrolla-light/80 hover:bg-fortrolla-gray/30'}`}
+                  ? 'bg-gradient-to-r from-fortrolla-pink to-fortrolla-magenta text-white shadow-lg shadow-fortrolla-pink/30' 
+                  : 'bg-fortrolla-gray/20 backdrop-blur-sm text-fortrolla-light/80 hover:bg-fortrolla-gray/30'}`}
             >
               {category.name}
             </button>
@@ -87,7 +103,7 @@ const ProjectsSection = () => {
           {filteredProjects.map((project, index) => (
             <div 
               key={index} 
-              className="group bg-fortrolla-black rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-fortrolla-gray/10 hover:border-fortrolla-pink/30"
+              className="group bg-gradient-to-br from-fortrolla-black/90 to-fortrolla-gray/10 backdrop-blur-sm rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-fortrolla-gray/10 hover:border-fortrolla-pink/30"
             >
               <div className="relative overflow-hidden aspect-video">
                 <img 
@@ -96,11 +112,14 @@ const ProjectsSection = () => {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-fortrolla-black to-transparent opacity-60"></div>
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-fortrolla-pink/30 backdrop-blur-sm">
-                  <button className="bg-fortrolla-black px-4 py-2 rounded-full text-fortrolla-white text-sm font-medium hover:bg-fortrolla-dark transition-colors duration-300">
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-fortrolla-pink/40 to-fortrolla-magenta/30 backdrop-blur-sm">
+                  <button className="bg-fortrolla-black/70 backdrop-blur-sm px-5 py-2.5 rounded-full text-fortrolla-white text-sm font-medium hover:bg-fortrolla-black transition-colors duration-300 border border-fortrolla-pink/30">
                     View Project
                   </button>
                 </div>
+                
+                {/* Corner accent */}
+                <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-fortrolla-pink/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
               </div>
               
               <div className="p-6">
@@ -108,7 +127,7 @@ const ProjectsSection = () => {
                   <h3 className="text-lg font-semibold text-fortrolla-white group-hover:text-fortrolla-pink transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <span className="text-xs uppercase tracking-wider bg-fortrolla-pink/10 text-fortrolla-pink px-2 py-1 rounded">
+                  <span className="text-xs uppercase tracking-wider bg-gradient-to-r from-fortrolla-pink/20 to-fortrolla-magenta/10 text-fortrolla-pink px-2 py-1 rounded">
                     {project.category}
                   </span>
                 </div>
@@ -121,7 +140,7 @@ const ProjectsSection = () => {
         </div>
         
         <div className="mt-16 text-center">
-          <a href="#contact" className="btn-secondary">
+          <a href="#contact" className="btn-secondary backdrop-blur-sm">
             Start Your Project
           </a>
         </div>

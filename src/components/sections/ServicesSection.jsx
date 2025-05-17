@@ -33,8 +33,27 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="py-24 bg-fortrolla-black">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="services" className="relative py-24 overflow-hidden">
+      {/* Background with gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-fortrolla-black via-fortrolla-dark/90 to-fortrolla-pink/10"></div>
+      
+      {/* Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-fortrolla-gold to-transparent opacity-30"></div>
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-fortrolla-pink to-transparent opacity-30"></div>
+      
+      {/* Animated Gradient Circles */}
+      <div className="absolute top-40 -left-40 w-96 h-96 bg-fortrolla-pink/10 rounded-full filter blur-3xl animate-float opacity-40"></div>
+      <div className="absolute bottom-40 -right-40 w-80 h-80 bg-fortrolla-gold/10 rounded-full filter blur-3xl animate-float opacity-30" style={{ animationDelay: '3s' }}></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl mx-auto">
+        <div className="absolute top-0 right-1/4 w-64 h-64 bg-fortrolla-magenta/5 rounded-full filter blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+      </div>
+      
+      {/* Grid Pattern Overlay */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="h-full w-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZoLTJ2LTRoMnY0em0wLTZoLTJ2LTRoMnY0em0wLTZoLTJWOGgydjR6bTAgMThoLTJ2LTRoMnY0em0wIDZoLTJ2LTRoMnY0em0wIDZoLTJ2LTRoMnY0em0wLTQyaC0yVjBoMnY2ek0xMiAzNGgtMnYtNGgydjR6bTAgNmgtMnYtNGgydjR6bTAtMTJoLTJ2LTRoMnY0em0wLTZoLTJ2LTRoMnY0em0wLTZoLTJWOGgydjR6bTAtNmgtMlYwaDJ2NnptMTIgMjRoLTJ2LTRoMnY0em0wIDZoLTJ2LTRoMnY0em0wLTEyaC0ydi00aDJ2NHptMC02aC0ydi00aDJ2NHptMC02aC0yVjhoMnY0em0wLTZoLTJWMGgydjZ6bTEyIDI0aC0ydi00aDJ2NHptMCA2aC0ydi00aDJ2NHptMC0xMmgtMnYtNGgydjR6bTAtNmgtMnYtNGgydjR6bTAtNmgtMlY4aDJ2NHptMC02aC0yVjBoMnY2eiIvPjwvZz48L2c+PC9zdmc+')]"></div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-fortrolla-white font-display text-3xl md:text-4xl font-bold mb-6">
             Our <span className="text-fortrolla-pink">Services</span>
@@ -48,32 +67,40 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="bg-gradient-to-br from-fortrolla-dark to-fortrolla-gray/30 p-8 rounded-lg border border-fortrolla-gray/10 group hover:border-fortrolla-pink/20 transition-all duration-300 hover:shadow-lg hover:shadow-fortrolla-pink/5"
+              className="relative overflow-hidden bg-gradient-to-br from-fortrolla-black/80 to-fortrolla-gray/20 backdrop-blur-sm p-8 rounded-lg border border-fortrolla-gray/10 group hover:border-fortrolla-pink/30 transition-all duration-500 hover:shadow-lg hover:shadow-fortrolla-pink/10"
             >
-              <div className="w-16 h-16 rounded-lg bg-fortrolla-pink/10 flex items-center justify-center mb-6 group-hover:bg-fortrolla-pink/20 transition-all duration-300">
-                <svg 
-                  className="w-8 h-8 text-fortrolla-pink" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d={service.icon} />
-                </svg>
+              {/* Card background accent */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-fortrolla-pink/0 via-fortrolla-pink/5 to-fortrolla-gold/5 blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+              
+              <div className="relative z-10">
+                <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-fortrolla-pink/20 to-fortrolla-magenta/5 flex items-center justify-center mb-6 group-hover:from-fortrolla-pink/30 group-hover:to-fortrolla-magenta/10 transition-all duration-300">
+                  <svg 
+                    className="w-8 h-8 text-fortrolla-pink" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d={service.icon} />
+                  </svg>
+                </div>
+                
+                <h3 className="text-xl font-semibold text-fortrolla-white mb-4 group-hover:text-fortrolla-pink transition-colors duration-300">
+                  {service.title}
+                </h3>
+                
+                <p className="text-fortrolla-light/80 leading-relaxed">
+                  {service.description}
+                </p>
               </div>
               
-              <h3 className="text-xl font-semibold text-fortrolla-white mb-4 group-hover:text-fortrolla-pink transition-colors duration-300">
-                {service.title}
-              </h3>
-              
-              <p className="text-fortrolla-light/80 leading-relaxed">
-                {service.description}
-              </p>
+              {/* Decorative corner accent */}
+              <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-gradient-to-tl from-fortrolla-pink/20 to-transparent rounded-tl-3xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
             </div>
           ))}
         </div>
         
         <div className="mt-16 text-center">
-          <a href="#contact" className="btn-primary">
+          <a href="#contact" className="btn-primary backdrop-blur-sm">
             Discuss Your Project
           </a>
         </div>

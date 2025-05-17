@@ -11,7 +11,14 @@ const HeroSection = () => {
   return (
     <section id="home" className="relative h-screen flex items-center overflow-hidden">
       {/* Background with gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-fortrolla-black via-fortrolla-black to-fortrolla-dark"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-fortrolla-black via-fortrolla-magenta/10 to-fortrolla-pink/20"></div>
+      
+      {/* Animated Gradient Circles */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-fortrolla-pink/10 rounded-full filter blur-3xl animate-float opacity-60"></div>
+        <div className="absolute top-1/2 -right-20 w-96 h-96 bg-fortrolla-magenta/10 rounded-full filter blur-3xl animate-float opacity-50" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute -bottom-40 left-1/3 w-72 h-72 bg-fortrolla-gold/10 rounded-full filter blur-3xl animate-float opacity-40" style={{ animationDelay: '4s' }}></div>
+      </div>
       
       {/* Grid Pattern Overlay */}
       <div className="absolute inset-0 opacity-5">
@@ -64,26 +71,7 @@ const HeroSection = () => {
             </a>
           </div>
           
-          {/* Scroll Indicator */}
-          <div 
-            className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center transition-all duration-1000 ${isLoaded ? 'opacity-100 transform-none' : 'opacity-0 translate-y-10'}`}
-            style={{ transitionDelay: '1000ms' }}
-          >
-            <span className="text-fortrolla-light/80 text-sm mb-2">Scroll Down</span>
-            <svg 
-              className="w-5 h-5 text-fortrolla-gold animate-bounce" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M19 14l-7 7m0 0l-7-7m7 7V3" 
-              />
-            </svg>
-          </div>
+
         </div>
       </div>
     </section>
