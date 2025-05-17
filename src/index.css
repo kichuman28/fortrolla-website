@@ -99,4 +99,31 @@
   .text-secondary {
     @apply text-fortrolla-gold;
   }
+  
+  /* Marquee animations for client logos */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-200px * 8 - 4rem * 8));
+    }
+  }
+  
+  @keyframes marquee-reverse {
+    0% {
+      transform: translateX(calc(-200px * 8 - 4rem * 8));
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+  
+  .animate-marquee-reverse {
+    animation: marquee-reverse 30s linear infinite;
+  }
 }
