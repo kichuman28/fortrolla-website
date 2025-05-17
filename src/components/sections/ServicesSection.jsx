@@ -22,13 +22,13 @@ const ServicesSection = () => {
     },
     {
       icon: "M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
-      title: "Film & Theatre Marketing",
+      title: "Holographic Projection",
       description: "Specialized promotion strategies for movies and theatrical productions that captivate audiences."
     },
     {
-      icon: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
-      title: "Brand Identity",
-      description: "Crafting distinctive visual identities that make your brand memorable and meaningful to your audience."
+      icon: "M15 2a3 3 0 013 3v12a3 3 0 01-3 3H9a3 3 0 01-3-3V5a3 3 0 013-3h6zM9 17h6a1 1 0 001-1V8a1 1 0 00-1-1H9a1 1 0 00-1 1v8a1 1 0 001 1zm12-14a1 1 0 011 1v5a1 1 0 01-1 1h-2V4a1 1 0 011-1h1zM3 4a1 1 0 011-1h1a1 1 0 011 1v5H3V4z",
+      title: "VFX and Animation",
+      description: "Stunning visual effects and animations that bring your ideas to life and create immersive experiences for your audience."
     },
   ];
 
