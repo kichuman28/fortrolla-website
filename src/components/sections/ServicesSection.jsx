@@ -2,13 +2,29 @@ import { useState, useEffect, useRef } from 'react';
 
 const ServicesSection = () => {
   const [activeService, setActiveService] = useState(0);
+  const [prevService, setPrevService] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const slideshowRef = useRef(null);
   const slideshowInterval = 5000; // 5 seconds per slide
+  
+  // Smooth transition between slides
+  const changeService = (index) => {
+    if (activeService === index) return;
+    
+    setIsTransitioning(true);
+    setPrevService(activeService);
+    setActiveService(index);
+    
+    // Reset transition state after animation completes
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 600); // Match this with the CSS transition duration
+  };
   
   // Automatic slideshow
   useEffect(() => {
     slideshowRef.current = setInterval(() => {
-      setActiveService((prev) => (prev + 1) % services.length);
+      changeService((activeService + 1) % services.length);
     }, slideshowInterval);
     
     return () => {
@@ -16,18 +32,33 @@ const ServicesSection = () => {
         clearInterval(slideshowRef.current);
       }
     };
-  }, []);
+  }, [activeService]);
   
   // Reset interval when manually changing slides
   const handleServiceChange = (index) => {
-    setActiveService(index);
+    if (isTransitioning) return; // Prevent changing during transition
     
     if (slideshowRef.current) {
       clearInterval(slideshowRef.current);
-      slideshowRef.current = setInterval(() => {
-        setActiveService((prev) => (prev + 1) % services.length);
-      }, slideshowInterval);
     }
+    
+    changeService(index);
+    
+    slideshowRef.current = setInterval(() => {
+      changeService((activeService + 1) % services.length);
+    }, slideshowInterval);
+  };
+  
+  // Determine slide direction for animation
+  const getSlideDirection = () => {
+    if (!isTransitioning) return '';
+    
+    // Calculate the shortest path in the circular array
+    const n = services.length;
+    const clockwise = (activeService - prevService + n) % n;
+    const counterClockwise = (prevService - activeService + n) % n;
+    
+    return clockwise <= counterClockwise ? 'slide-left' : 'slide-right';
   };
   
   const services = [
@@ -122,21 +153,31 @@ const ServicesSection = () => {
           </p>
           
           {/* Service title display */}
-          <div className="text-2xl font-display font-medium text-fortrolla-white">
-            <span className="relative">
-              <span className={`inline-block transition-all duration-500 ${activeService === services.findIndex(s => s.title === services[activeService].title) ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'}`}>
-                {services[activeService].title}
-              </span>
-            </span>
+          <div className="text-2xl font-display font-medium text-fortrolla-white h-10 relative">
+            {services.map((service, index) => (
+              <h3 
+                key={index}
+                className={`absolute w-full transition-all duration-500 ease-in-out ${
+                  activeService === index 
+                    ? 'opacity-100 transform-none' 
+                    : prevService === index && isTransitioning
+                      ? `opacity-0 ${getSlideDirection() === 'slide-left' ? '-translate-x-10' : 'translate-x-10'}`
+                      : 'opacity-0'
+                }`}
+              >
+                {service.title}
+              </h3>
+            ))}
           </div>
         </div>
         
         {/* Navigation Arrows - Outside Container */}
         <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-20">
           <button 
-            onClick={() => handleServiceChange((activeService - 1 + services.length) % services.length)}
-            className="p-3 rounded-full bg-fortrolla-black/60 backdrop-blur-sm border border-fortrolla-gray/20 hover:border-fortrolla-pink/30 transition-all duration-300 shadow-lg hover:shadow-fortrolla-pink/20"
+            onClick={() => !isTransitioning && handleServiceChange((activeService - 1 + services.length) % services.length)}
+            className={`p-3 rounded-full bg-fortrolla-black/60 backdrop-blur-sm border border-fortrolla-gray/20 hover:border-fortrolla-pink/30 transition-all duration-300 shadow-lg hover:shadow-fortrolla-pink/20 ${isTransitioning ? 'opacity-50 cursor-not-allowed' : ''}`}
             aria-label="Previous service"
+            disabled={isTransitioning}
           >
             <svg className="w-6 h-6 text-fortrolla-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
@@ -146,9 +187,10 @@ const ServicesSection = () => {
         
         <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-4 md:translate-x-12 z-20">
           <button 
-            onClick={() => handleServiceChange((activeService + 1) % services.length)}
-            className="p-3 rounded-full bg-fortrolla-black/60 backdrop-blur-sm border border-fortrolla-gray/20 hover:border-fortrolla-pink/30 transition-all duration-300 shadow-lg hover:shadow-fortrolla-pink/20"
+            onClick={() => !isTransitioning && handleServiceChange((activeService + 1) % services.length)}
+            className={`p-3 rounded-full bg-fortrolla-black/60 backdrop-blur-sm border border-fortrolla-gray/20 hover:border-fortrolla-pink/30 transition-all duration-300 shadow-lg hover:shadow-fortrolla-pink/20 ${isTransitioning ? 'opacity-50 cursor-not-allowed' : ''}`}
             aria-label="Next service"
+            disabled={isTransitioning}
           >
             <svg className="w-6 h-6 text-fortrolla-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
@@ -162,98 +204,116 @@ const ServicesSection = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-fortrolla-black/80 to-fortrolla-gray/20 backdrop-blur-sm rounded-2xl border border-fortrolla-gray/10 overflow-hidden">
             {/* Animated background elements */}
             <div className="absolute top-0 left-0 w-full h-full">
-              <div className={`absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-bl ${services[activeService].color} rounded-full filter blur-3xl opacity-10 animate-pulse`}></div>
-              <div className={`absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr ${services[activeService].color} rounded-full filter blur-3xl opacity-5 animate-pulse`} style={{ animationDelay: '1s' }}></div>
+              <div className={`absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-bl ${services[activeService].color} rounded-full filter blur-3xl opacity-10 animate-pulse transition-all duration-1000`}></div>
+              <div className={`absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr ${services[activeService].color} rounded-full filter blur-3xl opacity-5 animate-pulse transition-all duration-1000`} style={{ animationDelay: '1s' }}></div>
             </div>
           </div>
           
-          <div className="relative grid md:grid-cols-5 gap-6 p-8">
-            {/* Service Icon Column */}
-            <div className="md:col-span-2 flex flex-col items-center md:items-start justify-center">
-              <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${services[activeService].color} p-0.5 mb-6 shadow-lg shadow-fortrolla-pink/20`}>
-                <div className="w-full h-full rounded-full bg-fortrolla-black/80 flex items-center justify-center">
-                  <svg 
-                    className="w-16 h-16 text-white" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d={services[activeService].icon} />
-                  </svg>
-                </div>
-              </div>
-              
-              <h3 className="text-3xl font-bold text-fortrolla-white mb-4 text-center md:text-left">
-                {services[activeService].title}
-              </h3>
-              
-              <p className="text-fortrolla-light/80 leading-relaxed text-center md:text-left mb-6">
-                {services[activeService].description}
-              </p>
-              
-              <a 
-                href="#contact" 
-                className="btn-primary inline-flex items-center group"
+          {/* Fixed height container to prevent layout shift */}
+          <div className="relative h-[600px] md:h-[400px]">
+            {/* Service Content with Transitions */}
+            {services.map((service, index) => (
+              <div 
+                key={index}
+                className={`grid md:grid-cols-5 gap-6 p-8 transition-all duration-500 ease-in-out absolute inset-0 ${
+                  activeService === index 
+                    ? 'opacity-100 transform-none z-10' 
+                    : prevService === index && isTransitioning
+                      ? `opacity-0 ${getSlideDirection() === 'slide-left' ? '-translate-x-10' : 'translate-x-10'} z-0`
+                      : 'opacity-0 z-0'
+                }`}
+                style={{ 
+                  transitionDelay: activeService === index ? '0.1s' : '0s',
+                }}
               >
-                <span>Get Started</span>
-                <svg className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </a>
-            </div>
-            
-            {/* Service Details Column */}
-            <div className="md:col-span-3 flex flex-col">
-              <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Service Details */}
-                <div className="bg-fortrolla-black/40 backdrop-blur-md rounded-xl p-6 border border-fortrolla-gray/10">
-                  <h4 className="text-fortrolla-white text-lg font-medium mb-4">What We Offer</h4>
-                  <ul className="space-y-3">
-                    {services[activeService].details.map((detail, idx) => (
-                      <li key={idx} className="flex items-start">
-                        <div className={`flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br ${services[activeService].color} flex items-center justify-center mr-3 mt-0.5`}>
-                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                        <span className="text-fortrolla-light/90">{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
+                {/* Service Icon Column */}
+                <div className="md:col-span-2 flex flex-col items-center md:items-start justify-center">
+                  <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${service.color} p-0.5 mb-6 shadow-lg shadow-fortrolla-pink/20 transition-all duration-700`}>
+                    <div className="w-full h-full rounded-full bg-fortrolla-black/80 flex items-center justify-center">
+                      <svg 
+                        className="w-16 h-16 text-white" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d={service.icon} />
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-3xl font-bold text-fortrolla-white mb-4 text-center md:text-left">
+                    {service.title}
+                  </h3>
+                  
+                  <p className="text-fortrolla-light/80 leading-relaxed text-center md:text-left mb-6">
+                    {service.description}
+                  </p>
+                  
+                  <a 
+                    href="#contact" 
+                    className="btn-primary inline-flex items-center group"
+                  >
+                    <span>Get Started</span>
+                    <svg className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </a>
                 </div>
                 
-                {/* Service Process */}
-                <div className="bg-fortrolla-black/40 backdrop-blur-md rounded-xl p-6 border border-fortrolla-gray/10">
-                  <h4 className="text-fortrolla-white text-lg font-medium mb-4">Our Process</h4>
-                  <div className="space-y-4">
-                    <div className="flex items-center">
-                      <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${services[activeService].color} flex items-center justify-center mr-3`}>
-                        <span className="text-white text-sm font-medium">01</span>
-                      </div>
-                      <span className="text-fortrolla-light/90">Discovery & Strategy</span>
+                {/* Service Details Column */}
+                <div className="md:col-span-3 flex flex-col">
+                  <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Service Details */}
+                    <div className="bg-fortrolla-black/40 backdrop-blur-md rounded-xl p-6 border border-fortrolla-gray/10">
+                      <h4 className="text-fortrolla-white text-lg font-medium mb-4">What We Offer</h4>
+                      <ul className="space-y-3">
+                        {service.details.map((detail, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <div className={`flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center mr-3 mt-0.5`}>
+                              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <span className="text-fortrolla-light/90">{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <div className="flex items-center">
-                      <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${services[activeService].color} flex items-center justify-center mr-3`}>
-                        <span className="text-white text-sm font-medium">02</span>
+                    
+                    {/* Service Process */}
+                    <div className="bg-fortrolla-black/40 backdrop-blur-md rounded-xl p-6 border border-fortrolla-gray/10">
+                      <h4 className="text-fortrolla-white text-lg font-medium mb-4">Our Process</h4>
+                      <div className="space-y-4">
+                        <div className="flex items-center">
+                          <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center mr-3`}>
+                            <span className="text-white text-sm font-medium">01</span>
+                          </div>
+                          <span className="text-fortrolla-light/90">Discovery & Strategy</span>
+                        </div>
+                        <div className="flex items-center">
+                          <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center mr-3`}>
+                            <span className="text-white text-sm font-medium">02</span>
+                          </div>
+                          <span className="text-fortrolla-light/90">Creative Development</span>
+                        </div>
+                        <div className="flex items-center">
+                          <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center mr-3`}>
+                            <span className="text-white text-sm font-medium">03</span>
+                          </div>
+                          <span className="text-fortrolla-light/90">Implementation</span>
+                        </div>
+                        <div className="flex items-center">
+                          <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center mr-3`}>
+                            <span className="text-white text-sm font-medium">04</span>
+                          </div>
+                          <span className="text-fortrolla-light/90">Analysis & Optimization</span>
+                        </div>
                       </div>
-                      <span className="text-fortrolla-light/90">Creative Development</span>
-                    </div>
-                    <div className="flex items-center">
-                      <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${services[activeService].color} flex items-center justify-center mr-3`}>
-                        <span className="text-white text-sm font-medium">03</span>
-                      </div>
-                      <span className="text-fortrolla-light/90">Implementation</span>
-                    </div>
-                    <div className="flex items-center">
-                      <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${services[activeService].color} flex items-center justify-center mr-3`}>
-                        <span className="text-white text-sm font-medium">04</span>
-                      </div>
-                      <span className="text-fortrolla-light/90">Analysis & Optimization</span>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
         
@@ -262,13 +322,14 @@ const ServicesSection = () => {
           {services.map((_, index) => (
             <button
               key={index}
-              onClick={() => handleServiceChange(index)}
+              onClick={() => !isTransitioning && handleServiceChange(index)}
               className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                 activeService === index 
                   ? 'bg-fortrolla-pink w-6' 
                   : 'bg-fortrolla-gray/30 hover:bg-fortrolla-gray/50'
-              }`}
+              } ${isTransitioning ? 'pointer-events-none' : ''}`}
               aria-label={`Go to service ${index + 1}`}
+              disabled={isTransitioning}
             />
           ))}
         </div>
