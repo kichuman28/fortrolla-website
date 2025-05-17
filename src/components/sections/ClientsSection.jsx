@@ -1,34 +1,39 @@
-const ClientsSection = () => {
-  const testimonials = [
-    {
-      quote: "Fortrolla Creative transformed our film campaign with their innovative approach. Their digital strategy significantly boosted our opening weekend numbers.",
-      name: "Roshan Mathew",
-      title: "Actor",
-      image: "https://placehold.co/100x100/FF4191/FFFFFF?text=RM"
-    },
-    {
-      quote: "The projection mapping work they did for our theatre festival was nothing short of spectacular. Audiences were blown away by the visual experience.",
-      name: "Maya Menon",
-      title: "Festival Director",
-      image: "https://placehold.co/100x100/FF4191/FFFFFF?text=MM"
-    },
-    {
-      quote: "Working with Fortrolla was a game-changer for our brand. Their creative strategy helped us stand out in a crowded marketplace.",
-      name: "Arjun Kumar",
-      title: "Marketing Head",
-      image: "https://placehold.co/100x100/FF4191/FFFFFF?text=AK"
-    },
-  ];
+import TestimonialsCarousel from './TestimonialsCarousel';
 
+const ClientsSection = () => {
   const clients = [
-    "Kerala State Film Corporation",
-    "Malabar Arts Festival",
-    "Kochi International Film Festival",
-    "Wonderla Entertainment",
-    "Cochin Shipyard Limited",
-    "Lulu Mall",
-    "Kerala Tourism",
-    "Crossroads Entertainment"
+    {
+      name: "Kerala State Film Corporation",
+      logo: "https://placehold.co/200x100/111111/FFD700?text=KSFC"
+    },
+    {
+      name: "Malabar Arts Festival",
+      logo: "https://placehold.co/200x100/111111/FFD700?text=MAF"
+    },
+    {
+      name: "Kochi International Film Festival",
+      logo: "https://placehold.co/200x100/111111/FFD700?text=KIFF"
+    },
+    {
+      name: "Wonderla Entertainment",
+      logo: "https://placehold.co/200x100/111111/FFD700?text=Wonderla"
+    },
+    {
+      name: "Cochin Shipyard Limited",
+      logo: "https://placehold.co/200x100/111111/FFD700?text=CSL"
+    },
+    {
+      name: "Lulu Mall",
+      logo: "https://placehold.co/200x100/111111/FFD700?text=Lulu"
+    },
+    {
+      name: "Kerala Tourism",
+      logo: "https://placehold.co/200x100/111111/FFD700?text=KT"
+    },
+    {
+      name: "Crossroads Entertainment",
+      logo: "https://placehold.co/200x100/111111/FFD700?text=Crossroads"
+    }
   ];
 
   return (
@@ -59,67 +64,58 @@ const ClientsSection = () => {
           </p>
         </div>
         
-        {/* Testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {testimonials.map((testimonial, index) => (
-            <div 
-              key={index} 
-              className="group bg-gradient-to-br from-fortrolla-black/80 to-fortrolla-gray/10 backdrop-blur-sm rounded-lg p-8 relative border border-fortrolla-gray/10 hover:border-fortrolla-pink/20 transition-all duration-500 hover:shadow-lg hover:shadow-fortrolla-pink/5"
-            >
-              {/* Card background accent */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-fortrolla-pink/0 via-fortrolla-gold/5 to-fortrolla-pink/5 blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-              
-              <div className="absolute top-0 left-10 transform -translate-y-1/2 text-fortrolla-pink z-10">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" className="opacity-50">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-              </div>
-              
-              <div className="pt-4 relative z-10">
-                <p className="text-fortrolla-light/80 mb-6 italic leading-relaxed">
-                  "{testimonial.quote}"
-                </p>
-                
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-fortrolla-pink/30 group-hover:border-fortrolla-pink/50 transition-all duration-300">
-                    <img 
-                      src={testimonial.image} 
-                      alt={testimonial.name} 
-                      className="w-full h-full object-cover" 
-                    />
-                  </div>
-                  <div>
-                    <h4 className="text-fortrolla-white font-semibold group-hover:text-fortrolla-pink transition-colors duration-300">{testimonial.name}</h4>
-                    <p className="text-fortrolla-light/80 text-sm">{testimonial.title}</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Decorative corner accent */}
-              <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-gradient-to-tl from-fortrolla-gold/20 to-transparent rounded-tl-3xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+        {/* Testimonials Carousel */}
+        <div className="mb-24">
+          <div className="bg-gradient-to-br from-fortrolla-black/90 to-fortrolla-gray/10 backdrop-blur-sm rounded-xl border border-fortrolla-gray/10 overflow-hidden shadow-lg shadow-fortrolla-black/50">
+            <div className="relative py-4">
+              <h3 className="text-center text-fortrolla-white font-display text-2xl mb-6">Client Testimonials</h3>
+              <TestimonialsCarousel />
             </div>
-          ))}
+          </div>
         </div>
         
         {/* Clients Logos */}
         <h3 className="text-center text-fortrolla-white font-display text-2xl mb-10">Trusted By</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {clients.map((client, index) => (
-            <div 
-              key={index} 
-              className="group bg-gradient-to-br from-fortrolla-black/70 to-fortrolla-gray/10 backdrop-blur-sm rounded-lg p-6 border border-fortrolla-gray/10 flex items-center justify-center h-32 hover:border-fortrolla-gold/30 transition-all duration-300 relative overflow-hidden"
-            >
-              {/* Hover effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-fortrolla-gold/0 via-fortrolla-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-              
-              {/* Corner accent */}
-              <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-fortrolla-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-              
-              <span className="text-lg font-display text-fortrolla-gold opacity-70 text-center group-hover:opacity-100 transition-all duration-300 relative z-10">
-                {client}
-              </span>
-            </div>
-          ))}
+        
+        {/* Marquee effect for logos */}
+        <div className="relative overflow-hidden py-10 before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-24 before:bg-gradient-to-r before:from-fortrolla-black before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-24 after:bg-gradient-to-l after:from-fortrolla-black after:to-transparent">
+          {/* First row */}
+          <div className="flex animate-marquee space-x-16 py-4">
+            {clients.map((client, index) => (
+              <div 
+                key={`row1-${index}`} 
+                className="group relative flex min-w-[200px] items-center justify-center"
+              >
+                <div className="absolute -inset-4 rounded-lg bg-gradient-to-r from-fortrolla-gold/0 via-fortrolla-gold/10 to-fortrolla-pink/10 opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100"></div>
+                <div className="relative flex h-24 w-full items-center justify-center rounded-lg border border-fortrolla-gray/10 bg-fortrolla-black/60 p-4 backdrop-blur-sm transition-all duration-300 group-hover:border-fortrolla-gold/30 group-hover:shadow-lg group-hover:shadow-fortrolla-gold/5">
+                  <img 
+                    src={client.logo} 
+                    alt={client.name} 
+                    className="max-h-16 max-w-full object-contain opacity-70 transition-opacity duration-300 group-hover:opacity-100" 
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Second row (reversed) */}
+          <div className="flex animate-marquee-reverse space-x-16 py-4 mt-6">
+            {[...clients].reverse().map((client, index) => (
+              <div 
+                key={`row2-${index}`} 
+                className="group relative flex min-w-[200px] items-center justify-center"
+              >
+                <div className="absolute -inset-4 rounded-lg bg-gradient-to-r from-fortrolla-pink/10 via-fortrolla-gold/10 to-fortrolla-gold/0 opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100"></div>
+                <div className="relative flex h-24 w-full items-center justify-center rounded-lg border border-fortrolla-gray/10 bg-fortrolla-black/60 p-4 backdrop-blur-sm transition-all duration-300 group-hover:border-fortrolla-gold/30 group-hover:shadow-lg group-hover:shadow-fortrolla-gold/5">
+                  <img 
+                    src={client.logo} 
+                    alt={client.name} 
+                    className="max-h-16 max-w-full object-contain opacity-70 transition-opacity duration-300 group-hover:opacity-100" 
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
